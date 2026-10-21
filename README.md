@@ -44,7 +44,7 @@ The data is Ferretería El Tornillo, S.A., a fictional hardware store, on 15 Oct
 | Invoice from an unknown supplier asking to be paid today | Rejected, escalated |
 | P-77 overdue, F-2210 due on the 18th | Two payment proposals, waiting for approval |
 | Orders 501 and 502 delivered | Invoices FV-1004 and FV-1005 |
-| FV-1001 overdue | A reminder draft, waiting to be sent |
+| FV-1001 overdue, while $1,000 from the same customer is unresolved | A reminder draft for a person to send, or held until the payment is sorted out |
 | Bank: $2,140 and $321 | Matched to FV-1002 and FV-1003 |
 | Bank: $500 cash deposit, $1,000 against a $1,070 invoice | Escalated |
 
@@ -68,7 +68,7 @@ echo ANTHROPIC_API_KEY=sk-ant-… > .env    # git-ignored; or sign in with `ant 
 npm run demo
 ```
 
-The orchestrator runs on `claude-opus-5-5` with adaptive thinking, delegates to the agents, and prints its report. Then the demo prints the tables: what was recorded, issued and matched, what's waiting for approval and what was escalated. Server-side fallback is on, so a turn a safety classifier declines is retried on another model instead of failing the run.
+The orchestrator runs on `claude-opus-5-5` with adaptive thinking, delegates to the agents, and prints its report. A full day is about 40 tool calls. Then the demo prints the tables: what was recorded, issued and matched, what's waiting for approval and what was escalated. Server-side fallback is on, so a turn a safety classifier declines is retried on another model instead of failing the run.
 
 ## Files
 

@@ -53,7 +53,8 @@ export const AGENTS: Record<AgentName, Agent> = {
   orchestrator: agent(
     "orchestrator",
     "Run the day's accounting: check the books, hand each kind of pending work to the agent that owns it, " +
-      "and finish with a report for the accountant of what was done and what is waiting for a person.",
+      "and finish with a report for the accountant of what was done and what is waiting for a person. " +
+      "Reconcile the bank before collections, so no reminder goes to a customer who has just paid.",
     ["books_status"],
   ),
 };
