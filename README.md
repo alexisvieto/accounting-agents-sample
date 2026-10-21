@@ -64,7 +64,7 @@ The tests don't call the API. A scripted model plays each agent's turns, includi
 ## Run the day with Claude
 
 ```bash
-export ANTHROPIC_API_KEY=…    # or sign in with `ant auth login`
+echo ANTHROPIC_API_KEY=sk-ant-… > .env    # git-ignored; or sign in with `ant auth login`
 npm run demo
 ```
 

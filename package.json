@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Seven Claude agents keep the books of a small company; Postgres decides what each may do",
   "scripts": {
-    "demo": "node src/demo.ts",
+    "demo": "node --env-file-if-exists=.env src/demo.ts",
     "test": "node --test test/*.test.ts",
     "typecheck": "tsc --noEmit"
   },
