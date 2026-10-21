@@ -1,0 +1,25 @@
+{
+  "name": "accounting-agents-sample",
+  "version": "0.1.0",
+  "description": "Seven Claude agents keep the books of a small company; Postgres decides what each may do",
+  "scripts": {
+    "demo": "node src/demo.ts",
+    "test": "node --test test/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.137.0",
+    "@electric-sql/pglite": "^0.5.10",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=22.18"
+  }
+}
