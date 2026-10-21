@@ -238,10 +238,17 @@ const draftReminder = tool(
   "Save a payment reminder as a draft for a person to review and send. Spanish, courteous, with invoice number, " +
     "amount and due date.",
   { customer_invoice_id: z.number().int(), body: z.string().min(20).max(2000) },
-  async (q, { customer_invoice_id, body }) => {
-    const inv = one(await q("select paid from customer_invoices where id = $1", [customer_invoice_id]));
+  async (q, { customer_invoice_id, body }, { today }) => {
+    const inv = one(
+      await q("select paid, ($2::date - due_on) as days_overdue from customer_invoices where id = $1", [
+        customer_invoice_id,
+        today,
+      ]),
+    );
     if (!inv) throw new Rejected(`No customer invoice ${customer_invoice_id}.`);
     if (inv.paid) throw new Rejected("That invoice is paid.");
+    if (Number(inv.days_overdue) > 60)
+      throw new Rejected(`${inv.days_overdue} days overdue: past 60 days a person handles it. Escalate instead.`);
     const [row] = await q(
       "insert into reminder_drafts (customer_invoice_id, body) values ($1, $2) returning id",
       [customer_invoice_id, body],

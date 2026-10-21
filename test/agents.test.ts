@@ -192,6 +192,19 @@ describe("collections", () => {
       /permission denied/,
     );
   });
+
+  test("past 60 days overdue, a person takes over", async () => {
+    await owner("update customer_invoices set due_on = '2026-08-01' where id = 1");
+    const { result, resultsFor } = run("collections", {
+      collections: [
+        [{ tool: "draft_reminder", input: { customer_invoice_id: 1, body: "Estimados, les recordamos la factura FV-1001." } }],
+        { text: "x" },
+      ],
+    });
+    await result;
+    assert.match(resultsFor("collections")[0].text, /75 days overdue/);
+    assert.equal((await owner("select count(*)::int as n from reminder_drafts"))[0].n, 0);
+  });
 });
 
 describe("archive", () => {

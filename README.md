@@ -55,8 +55,8 @@ You need Node.js 22.18+ and nothing else. The books run in [PGlite](https://pgli
 ```bash
 npm install
 npm test
-# ℹ tests 19
-# ℹ pass 19
+# ℹ tests 20
+# ℹ pass 20
 ```
 
 The tests don't call the API. A scripted model plays each agent's turns, including the wrong moves: calling a tool it doesn't have, sending bad arithmetic, trying a partial match, passing SQL in a field, refusing, looping. The tests check that the harness, the tools and the database stop each one, and that every write is attributed in the audit log.
@@ -81,7 +81,7 @@ The orchestrator runs on `claude-opus-5-5` with adaptive thinking, delegates to 
 | `src/harness.ts` | The agent loop: role switch, logging, delegation, escalation |
 | `src/model.ts` | The Claude call (or anything that answers like it) |
 | `src/demo.ts` | One day with Claude |
-| `test/` | 19 tests and the scripted model |
+| `test/` | 20 tests and the scripted model |
 
 In production the same design runs against the client's own database or ERP, and the approval queue and the agents' log are a panel the accounting team works from.
 
